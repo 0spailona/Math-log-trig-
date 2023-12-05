@@ -1,5 +1,3 @@
-//import Character from "../Character";
-//import MagicCharacter from "../MagicCharacter";
 import Daemon from "../Daemon";
 import Magician from "../Magician";
 
