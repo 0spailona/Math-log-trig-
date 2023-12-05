@@ -1,0 +1,19 @@
+const path = require('node:path');
+const {logPlugin} = require("@babel/preset-env/lib/debug");
+
+module.exports = {
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+    ],
+  },
+};
