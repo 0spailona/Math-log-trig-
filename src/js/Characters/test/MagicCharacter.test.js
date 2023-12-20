@@ -6,10 +6,24 @@ const charactersList = [
     [Magician],
 ];
 const handlerForStonedStatus = test.each(charactersList)
-handlerForStonedStatus('Change stonedStatus and get new value for s%', (magicCharacter) => {
+handlerForStonedStatus('Change stoned and get new value for s%', (magicCharacter) => {
     const newPlayer = new magicCharacter('AAAA');
     newPlayer.stoned = true;
-    expect(newPlayer.stonedStatus).toBe(true)
+    expect(newPlayer.stoned).toBe(true)
+})
+
+const handlerForAttackValue = test.each(charactersList);
+handlerForAttackValue('Set attack value for s%', (magicCharacter) => {
+    const newPlayer = new magicCharacter('AAAA');
+    newPlayer.attack = 20;
+    newPlayer.distance = 1;
+    expect(newPlayer.attack).toBe(20)
+})
+
+const handlerForCatchError = test.each(charactersList);
+handlerForCatchError('Catch Error with distance < 1', (magicCharacter) => {
+    const newPlayer = new magicCharacter('AAAA');
+    expect(() => newPlayer.distance = 0).toThrow("Distance should be greater or equal to 1")
 })
 
 const charactersListForAttack = [
@@ -21,8 +35,11 @@ const charactersListForAttack = [
     [Magician, 15, true, 0],
 ];
 const handlerForGetAttack = test.each(charactersListForAttack);
-handlerForGetAttack('Get really attack for s%', (magicCharacter, distance, stonedStatus, expected) => {
+handlerForGetAttack('Get really attack for s%', (magicCharacter, distance, stoned, expected) => {
     const newPlayer = new magicCharacter('AAAA');
-    newPlayer.stoned = stonedStatus;
-    expect(newPlayer.countAttackPower(distance)).toBe(expected)
+    newPlayer.stoned = stoned;
+    newPlayer.distance = distance;
+    expect(newPlayer.attack).toBe(expected)
 })
+
+
